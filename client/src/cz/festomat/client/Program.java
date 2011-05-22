@@ -9,6 +9,10 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
+import cz.festomat.client.data.DataSource;
+import cz.festomat.client.data.FestivalBean;
+import cz.festomat.client.data.IDataSource;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.webkit.WebView;
@@ -27,8 +31,14 @@ class ProgramFetcher{
     private String programFooter = "</body>" +
 	"</html>"; 
     
-	public String getProgram(String url) {
+	public String getProgram(String festivalId) {
 		String returnHtml = new String();
+		
+		IDataSource ds = DataSource.getInstance();
+		FestivalBean festivalBean = ds.getFestivalById(festivalId);
+		returnHtml = festivalBean.getDescription();
+		
+		/**
 		try {
 			HttpClient httpClient = new DefaultHttpClient();
 			HttpPost httpPost = new HttpPost(url);
@@ -49,6 +59,7 @@ class ProgramFetcher{
 					"</table>";
 					
 		}
+		*/
 		return programHeader + returnHtml + programFooter;
 	}
 
@@ -60,11 +71,13 @@ public class Program extends Activity {
 
         setContentView(R.layout.program);
         
+        String festivalId = getIntent().getExtras().getString("festivalId");
+        
         WebView programWebView = (WebView) findViewById(R.id.program);
         //programWebView.getSettings().setJavaScriptEnabled(true);
         
         programWebView.setBackgroundColor(0);
-        String summary = new ProgramFetcher().getProgram("http://bl00der.kbx.cz/festomat/festomat00.html");
+        String summary = new ProgramFetcher().getProgram(festivalId);
         programWebView.loadData(summary, "text/html", "utf-8");
 
     }
