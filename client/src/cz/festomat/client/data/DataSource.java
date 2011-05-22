@@ -10,10 +10,10 @@ public class DataSource {
 	public static IDataSource getInstance() {
 		if(instance == null) {
 			//pro testovaci ucely
-			instance = new DataSourceImplTest();
+			// instance = new DataSourceImplTest();
 			
 			//ostre DS
-			//instance = new DataSourceImpl();
+			instance = new DataSourceImpl();
 		}
 		return instance;
 	}

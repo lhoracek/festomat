@@ -3,8 +3,10 @@
  */
 package cz.festomat.server.model;
 
+import java.util.Collection;
 import java.util.Date;
 
+import javax.jdo.annotations.Element;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.NullValue;
@@ -62,6 +64,13 @@ public class Festival {
 	 */
 	@Persistent(nullValue = NullValue.EXCEPTION)
 	private Date	konec;
+
+	/**
+	 * Kommenty festivalu
+	 */
+	@Persistent(mappedBy = "festival")
+	@Element(dependent = "true")
+	private Collection<Comment>	komentare;
 
 	public Key getKey() {
 		return key;
@@ -125,6 +134,14 @@ public class Festival {
 
 	public void setLat(String lat) {
 		this.lat = lat;
+	}
+
+	public Collection<Comment> getKomentare() {
+		return komentare;
+	}
+
+	public void setKomentare(Collection<Comment> komentare) {
+		this.komentare = komentare;
 	}
 
 }

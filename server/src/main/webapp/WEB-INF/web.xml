@@ -4,7 +4,7 @@
     "http://java.sun.com/dtd/web-app_2_3.dtd">
 
 <web-app>
-	<display-name>Pluto</display-name>
+	<display-name>Festomat</display-name>
 
 	<context-param>
 		<description>Vaadin production mode</description>
@@ -19,6 +19,11 @@
 		<servlet-class>cz.festomat.server.servlets.ImportServlet</servlet-class>
 	</servlet>
 	
+	<servlet>
+		<servlet-name>operator</servlet-name>
+		<servlet-class>cz.festomat.server.servlets.FestivalOperator</servlet-class>
+	</servlet>
+
 	<servlet>
 		<servlet-name>VaadinServlet</servlet-name>
 		<servlet-class>com.vaadin.terminal.gwt.server.GAEApplicationServlet</servlet-class>
@@ -37,6 +42,14 @@
 		<servlet-name>VaadinServlet</servlet-name>
 		<url-pattern>/admin/*</url-pattern>
 	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>operator</servlet-name>
+		<url-pattern>/*</url-pattern>
+	</servlet-mapping>
+	
+	
+
 
 	<!-- Default page to serve -->
 	<welcome-file-list>

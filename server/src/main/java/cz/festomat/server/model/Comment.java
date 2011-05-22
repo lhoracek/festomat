@@ -45,6 +45,12 @@ public class Comment {
 	@Persistent(nullValue = NullValue.EXCEPTION)
 	private String	text;
 
+	/**
+	 * Jméno festivalu
+	 */
+	@Persistent(nullValue = NullValue.EXCEPTION)
+	private Festival	festival;
+
 	public Key getKey() {
 		return key;
 	}
@@ -75,6 +81,14 @@ public class Comment {
 
 	public void setText(String text) {
 		this.text = text;
+	}
+
+	public Festival getFestival() {
+		return festival;
+	}
+
+	public void setFestival(Festival festival) {
+		this.festival = festival;
 	}
 
 }

@@ -58,8 +58,8 @@ public class Program extends Activity {
         
         Bundle festivalBund = getIntent().getExtras();
          
-        //String festivalId = festivalBund.getString("festivalId");
-        String festivalId = "ASFHGF1";
+        String festivalId = festivalBund.getString("festivalId");
+        //String festivalId = "ASFHGF1";
         
         
         WebView programWebView = (WebView) findViewById(R.id.program);
