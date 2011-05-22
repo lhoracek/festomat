@@ -71,7 +71,9 @@ public class Program extends Activity {
 
         setContentView(R.layout.program);
         
-        String festivalId = getIntent().getExtras().getString("festivalId");
+        //String festivalId = getIntent().getExtras().getString("festivalId");
+        String festivalId = "ASFHGF1";
+        
         
         WebView programWebView = (WebView) findViewById(R.id.program);
         //programWebView.getSettings().setJavaScriptEnabled(true);
