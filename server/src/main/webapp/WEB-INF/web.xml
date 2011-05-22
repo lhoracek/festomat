@@ -14,6 +14,10 @@
 
 	<!-- Servlets -->
 
+	<servlet>
+		<servlet-name>import</servlet-name>
+		<servlet-class>cz.festomat.server.servlets.ImportServlet</servlet-class>
+	</servlet>
 	
 	<servlet>
 		<servlet-name>VaadinServlet</servlet-name>
@@ -24,7 +28,10 @@
 		</init-param>
 	</servlet>
 
-
+	<servlet-mapping>
+		<servlet-name>import</servlet-name>
+		<url-pattern>/import</url-pattern>
+	</servlet-mapping>
 	
 	<servlet-mapping>
 		<servlet-name>VaadinServlet</servlet-name>
