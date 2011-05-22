@@ -19,9 +19,10 @@ import android.webkit.WebView;
 import android.widget.TextView;
 
 class ProgramFetcher{
-	private String url;
+	private String festivalId;
 	//program in html:
-    private String program;
+    private String descriptionHtml;
+    private String title;
     
     private String programHeader = "<html>" +
 	"<body>" +
@@ -31,36 +32,20 @@ class ProgramFetcher{
     private String programFooter = "</body>" +
 	"</html>"; 
     
-	public String getProgram(String festivalId) {
-		String returnHtml = new String();
-		
-		IDataSource ds = DataSource.getInstance();
+    public ProgramFetcher(String festivalId) {
+    	IDataSource ds = DataSource.getInstance();
 		FestivalBean festivalBean = ds.getFestivalById(festivalId);
-		returnHtml = festivalBean.getDescription();
-		
-		/**
-		try {
-			HttpClient httpClient = new DefaultHttpClient();
-			HttpPost httpPost = new HttpPost(url);
-			HttpResponse httpResponse = httpClient.execute(httpPost);
-			if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-				returnHtml = EntityUtils.toString(httpResponse.getEntity());
-			} else {
-				returnHtml = 
-					"<table>" +
-					"<tr><td>Chyba, nelze nacist data :-/.</td></tr>" +					 
-					"</table>";
-			}
-		} catch (IOException e) {
-			returnHtml = 
-					"<table>" +
-					"<tr><td><b>Cas</b></td><td><b>Aktivita</b></td></tr>" +
-					"<tr><td>Chyba, nelze nacist data :-/.</td><td>nic</td></tr>" +					 
-					"</table>";
-					
-		}
-		*/
-		return programHeader + returnHtml + programFooter;
+		festivalBean.getName();
+		this.descriptionHtml = festivalBean.getDescription();
+		this.title = festivalBean.getName();    	    	
+	}
+    
+	public String getDescriptionHtml() {		
+		return programHeader + this.descriptionHtml + programFooter;
+	}
+	
+	public String getTitle(){
+		return this.title;
 	}
 
 }
@@ -71,7 +56,9 @@ public class Program extends Activity {
 
         setContentView(R.layout.program);
         
-        //String festivalId = getIntent().getExtras().getString("festivalId");
+        Bundle festivalBund = getIntent().getExtras();
+         
+        //String festivalId = festivalBund.getString("festivalId");
         String festivalId = "ASFHGF1";
         
         
@@ -79,7 +66,10 @@ public class Program extends Activity {
         //programWebView.getSettings().setJavaScriptEnabled(true);
         
         programWebView.setBackgroundColor(0);
-        String summary = new ProgramFetcher().getProgram(festivalId);
+        ProgramFetcher pf = new ProgramFetcher(festivalId);
+        String summary = pf.getDescriptionHtml();
+        String title = pf.getTitle();
+        this.setTitle(title);
         programWebView.loadData(summary, "text/html", "utf-8");
 
     }
