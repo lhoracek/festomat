@@ -15,6 +15,10 @@ public class CommentBean {
 		this.text = text;
 	}
 	
+	public CommentBean() {
+		super();
+	}
+
 	public String getAuthor() {
 		return author;
 	}

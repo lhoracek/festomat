@@ -16,6 +16,11 @@ public class FestivalBean {
 		this.end = end;
 		this.description = description;
 	}
+
+	public FestivalBean() {
+		super();
+	}
+
 	//key
 	private String id;
 	private String address;

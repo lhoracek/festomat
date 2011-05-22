@@ -7,9 +7,11 @@ import java.util.Collection;
 import java.util.Date;
 
 import javax.jdo.annotations.Element;
+import javax.jdo.annotations.Extension;
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.NullValue;
+import javax.jdo.annotations.Order;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
@@ -70,6 +72,7 @@ public class Festival {
 	 */
 	@Persistent(mappedBy = "festival")
 	@Element(dependent = "true")
+	@Order(extensions = @Extension(vendorName = "datanucleus", key = "list-ordering", value = "time desc"))
 	private Collection<Comment>	komentare;
 
 	public Key getKey() {
