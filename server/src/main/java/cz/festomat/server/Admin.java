@@ -22,7 +22,7 @@ public class Admin extends Application {
 	private static String[]								fields					= { "jmeno", "adresa", "lng", "lat",
 			"zacatek", "konec", "popis"										};
 	private static String[]								visibleCols				= new String[] { "jmeno", "adresa",
-			"gps"																};
+			"lng", "lat"														};
 
 	private final Table									contactList				= new Table();
 	private final Form									contactEditor			= new Form();
