@@ -42,8 +42,10 @@ public class DataSourceImpl implements IDataSource {
 
 	@Override
 	public List<CommentBean> getAllComments(String festivalId) {
-		// TODO Auto-generated method stub
-		return null;
+		List<CommentBean> list =
+			(List<CommentBean>)rc.getData(festivalId + "/comments",
+					new TypeToken<List<CommentBean>>(){}.getType());
+		return list;
 	}
 
 	@Override
