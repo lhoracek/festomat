@@ -17,7 +17,15 @@ import android.widget.TextView;
 class ProgramFetcher{
 	private String url;
 	//program in html:
-    private String program;    
+    private String program;
+    
+    private String programHeader = "<html>" +
+	"<body>" +
+	"<style type=\"text/css\">"+
+	"body {color: white; }"  +		
+	"</style>";
+    private String programFooter = "</body>" +
+	"</html>"; 
     
 	public String getProgram(String url) {
 		String returnHtml = new String();
@@ -27,21 +35,21 @@ class ProgramFetcher{
 			HttpResponse httpResponse = httpClient.execute(httpPost);
 			if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
 				returnHtml = EntityUtils.toString(httpResponse.getEntity());
+			} else {
+				returnHtml = 
+					"<table>" +
+					"<tr><td>Chyba, nelze nacist data :-/.</td></tr>" +					 
+					"</table>";
 			}
 		} catch (IOException e) {
-			returnHtml = "<html>" +
-					"<body>" +
-					"<style type=\"text/css\">"+
-					"body {color: white; }"  +		
-					"</style>" +
+			returnHtml = 
 					"<table>" +
 					"<tr><td><b>Cas</b></td><td><b>Aktivita</b></td></tr>" +
 					"<tr><td>Chyba, nelze nacist data :-/.</td><td>nic</td></tr>" +					 
-					"</table>" +
-					"</body>" +
-					"</html>";
+					"</table>";
+					
 		}
-		return returnHtml;
+		return programHeader + returnHtml + programFooter;
 	}
 
 }
@@ -56,7 +64,7 @@ public class Program extends Activity {
         //programWebView.getSettings().setJavaScriptEnabled(true);
         
         programWebView.setBackgroundColor(0);
-        String summary = new ProgramFetcher().getProgram("http://bl00der.kbx.cz/festomat/festomat.html");
+        String summary = new ProgramFetcher().getProgram("http://bl00der.kbx.cz/festomat/festomat00.html");
         programWebView.loadData(summary, "text/html", "utf-8");
 
     }
