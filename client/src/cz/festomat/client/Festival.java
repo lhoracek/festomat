@@ -41,6 +41,7 @@ public class Festival extends TabActivity {
 	    
 	    
 	    intent = new Intent().setClass(this, Chat.class);
+	    intent.putExtras(bundle);
 	    spec = tabHost.newTabSpec("chat").setIndicator("Chat",
 	                      null)
 	                  .setContent(intent);
