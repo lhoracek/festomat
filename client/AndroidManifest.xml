@@ -14,10 +14,6 @@
 			</intent-filter>
 		</activity>
 		<activity android:name=".Festival" android:label="Festival">
-		<intent-filter>
-			<action android:name="android.intent.action.MAIN" />
-			<category android:name="android.intent.category.LAUNCHER" />
-		</intent-filter>
 		</activity>
 		<activity android:name=".Program" android:label="Program" />
 		<activity android:name=".Chat" android:label="Chat" />
