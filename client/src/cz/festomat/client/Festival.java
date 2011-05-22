@@ -47,7 +47,7 @@ public class Festival extends TabActivity {
 	    tabHost.addTab(spec);
 
 	
-	    tabHost.setCurrentTab(1);
+	    tabHost.setCurrentTab(0);
         
         
        
