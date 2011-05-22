@@ -9,7 +9,7 @@ public interface IDataSource {
 	
 	FestivalBean getFestivalById(String id);
 	
-	List<CommentBean> getAllComments();
+	List<CommentBean> getAllComments(String festivalId);
 	
-	void sendComment(CommentBean comment);
+	void sendComment(String festivalId, CommentBean comment);
 }

@@ -87,7 +87,6 @@ public class ImportServlet extends HttpServlet {
 			pm.close();
 		}
 
-		super.doGet(req, resp);
 	}
 
 }
