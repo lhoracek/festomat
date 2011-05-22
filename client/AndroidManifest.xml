@@ -13,6 +13,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".Festival"
+                  android:label="Festival"/>
+ <activity android:name=".Program"
+                  android:label="Program"/>
+                   <activity android:name=".Chat"
+                  android:label="Chat"/>
     </application>
 </manifest>
