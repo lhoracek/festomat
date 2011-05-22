@@ -1,13 +1,6 @@
 package cz.festomat.client;
 
-
-import cz.festomat.client.data.DataSource;
-import cz.festomat.client.data.DataSourceImplTest;
-import cz.festomat.client.data.IDataSource;
-
-
 import java.util.ArrayList;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,127 +21,118 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import cz.festomat.client.data.DataSource;
+import cz.festomat.client.data.IDataSource;
 
 public class FestivalList extends ListActivity {
-	public static final String TAG = "Festomat";
-	private ArrayList<String> festivals = null;
-	private ArrayList<String> filtered = null;
+	public static final String	TAG					= "Festomat";
+	private ArrayList<String>	festivals			= null;
+	private ArrayList<String>	filtered			= null;
 
-	private Map<String,String> festNames = null;
-	private Map<String,String> filteredFestNames = null;
-	//private ArrayList<String> names = null;
+	private Map<String, String>	festNames			= null;
+	private Map<String, String>	filteredFestNames	= null;
+	// private ArrayList<String> names = null;
 
-	private IDataSource source;
-	
-	private FestAdapter f_adapter;
-	
-	private EditText search;
+	private IDataSource			source;
+
+	private FestAdapter			f_adapter;
+
+	private EditText			search;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		festivals =  new ArrayList<String>();
+		festivals = new ArrayList<String>();
 		filtered = new ArrayList<String>();
-		
-		f_adapter = new FestAdapter(this, android.R.layout.simple_list_item_1,
-				filtered);
+
+		f_adapter = new FestAdapter(this, android.R.layout.simple_list_item_1, filtered);
 		setListAdapter(f_adapter);
 
-		search = ((EditText) findViewById(R.id.search)); 
-		
-		
-				search.addTextChangedListener(new TextWatcher() {
+		search = ((EditText) findViewById(R.id.search));
 
-					public void afterTextChanged(Editable s) {
-						Log.d(TAG, "afterTextChanged");
-					}
+		search.addTextChangedListener(new TextWatcher() {
 
-					public void beforeTextChanged(CharSequence s, int start,
-							int count, int after) {
-						Log.d(TAG, "beforeTextChanged");
-					}
+			@Override
+			public void afterTextChanged(Editable s) {
+				Log.d(TAG, "afterTextChanged");
+			}
 
-					public void onTextChanged(CharSequence s, int start,
-							int before, int count) {
-						Log.d(TAG, "onTextChanged");
-						filterList(s.toString());
-					}
-				});
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+				Log.d(TAG, "beforeTextChanged");
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				Log.d(TAG, "onTextChanged");
+				filterList(s.toString());
+			}
+		});
 		new LoaderTask().execute();
 
 	}
 
 	private void filterList(String text) {
-		
+
 		if (!text.equals("")) {
 			filtered.clear();
-			filteredFestNames = new HashMap<String,String>();
+			filteredFestNames = new HashMap<String, String>();
 			int i = 0;
 			String currentFest = null;
-			
+
 			ArrayList<String> keys = new ArrayList<String>(festNames.keySet());
-			
-			
-			for(i=0;i<keys.size();i++) {
-//				currentFest = festivals.get(i); 
-				currentFest = festNames.get(keys.get(i)); 
+
+			for (i = 0; i < keys.size(); i++) {
+				// currentFest = festivals.get(i);
+				currentFest = festNames.get(keys.get(i));
 
 				if (currentFest.toLowerCase().contains(text.toLowerCase())) {
 					filtered.add(currentFest);
-					filteredFestNames.put(keys.get(i),currentFest);
+					filteredFestNames.put(keys.get(i), currentFest);
 				}
-				
-			
+
 			}
-			
-		}
-		else {
-//			filtered = new ArrayList<String>(festivals);
+
+		} else {
+			// filtered = new ArrayList<String>(festivals);
 			filtered = new ArrayList<String>(new ArrayList<String>(festNames.values()));
 			filteredFestNames = source.getAllFestivalls();
 		}
-		f_adapter = new FestAdapter(FestivalList.this,
-				android.R.layout.simple_list_item_1, filtered);
+		f_adapter = new FestAdapter(FestivalList.this, android.R.layout.simple_list_item_1, filtered);
 		setListAdapter(f_adapter);
 	}
-	
+
 	public void loadFests() {
-		Log.i(TAG,"loadFests");
-		
-		
-		 source = DataSource.getInstance();
-		
-		festNames = 
-			source.getAllFestivalls();
-		filteredFestNames = 
-			source.getAllFestivalls();
-	
-		
-		
+		Log.i(TAG, "loadFests");
+
+		source = DataSource.getInstance();
+
+		festNames = source.getAllFestivalls();
+		filteredFestNames = source.getAllFestivalls();
+
 		festivals = new ArrayList<String>(festNames.values());
-		
-		
+
 		filtered = new ArrayList<String>(festivals);
-		
-		
+
 	}
-	
+
+	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 
-		InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.hideSoftInputFromWindow(search.getWindowToken(), 0);
-		
+
 		Bundle bundle = new Bundle();
 
 		ArrayList<String> keys = new ArrayList<String>(festNames.keySet());
-		
-		String fid = (String) keys.get(position);
-		
-		Log.i(TAG,"posilam:"+position+" "+fid);
-		
-		bundle.putString("festivalId",  fid);
+
+		String fid = keys.get(position);
+
+		Log.i(TAG, "posilam:" + position + " " + fid);
+
+		bundle.putString("festivalId", fid);
 
 		Intent i = new Intent(this, Festival.class);
 		i.putExtras(bundle);
@@ -160,29 +144,27 @@ public class FestivalList extends ListActivity {
 	}
 
 	private class LoaderTask extends AsyncTask<Void, Void, Void> {
-		private ProgressDialog progressDialog;
+		private ProgressDialog	progressDialog;
 
+		@Override
 		protected void onPreExecute() {
-			progressDialog = ProgressDialog.show(FestivalList.this, "",
-					"Loading. Please wait...", true);
+			progressDialog = ProgressDialog.show(FestivalList.this, "", "Načítám...", true);
 		}
 
+		@Override
 		protected Void doInBackground(Void... arg0) {
 			try {
-
 				loadFests();
-
 			} catch (Exception e) {
 
 			}
-
 			return null;
 		}
 
+		@Override
 		protected void onPostExecute(Void result) {
 			progressDialog.dismiss();
-			f_adapter = new FestAdapter(FestivalList.this,
-					android.R.layout.simple_list_item_1, filtered);
+			f_adapter = new FestAdapter(FestivalList.this, android.R.layout.simple_list_item_1, filtered);
 			setListAdapter(f_adapter);
 
 		}
@@ -191,10 +173,9 @@ public class FestivalList extends ListActivity {
 
 	private class FestAdapter extends ArrayAdapter<String> {
 
-		private ArrayList<String> items;
+		private final ArrayList<String>	items;
 
-		public FestAdapter(Context context, int textViewResourceId,
-				ArrayList<String> items) {
+		public FestAdapter(Context context, int textViewResourceId, ArrayList<String> items) {
 			super(context, textViewResourceId, items);
 			this.items = items;
 		}
