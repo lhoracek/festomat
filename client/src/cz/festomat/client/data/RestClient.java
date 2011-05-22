@@ -18,7 +18,7 @@ import com.google.gson.Gson;
 
 public class RestClient {
 	
-	private String baseUrl = "http://festomat.appspot.com/";
+	public static final String	BASEURL	= "http://festomat.appspot.com/";
 	
 	private String convertStreamToString(InputStream is) {
         /*
@@ -57,7 +57,7 @@ public class RestClient {
         HttpClient httpclient = new DefaultHttpClient();
  
         // Prepare a request object
-        HttpGet httpget = new HttpGet(baseUrl + url); 
+		HttpGet httpget = new HttpGet(BASEURL + url);
  
         // Execute the request
         HttpResponse response;

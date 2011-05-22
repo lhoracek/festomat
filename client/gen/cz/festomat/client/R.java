@@ -16,7 +16,8 @@ public final class R {
     public static final class id {
         public static final int button1=0x7f050001;
         public static final int editText1=0x7f050000;
-        public static final int program=0x7f050002;
+        public static final int program=0x7f050003;
+        public static final int search=0x7f050002;
     }
     public static final class layout {
         public static final int chat=0x7f030000;
