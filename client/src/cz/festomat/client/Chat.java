@@ -49,6 +49,16 @@ public class Chat extends ListActivity {
                 }
         });
         
+        Button bE = (Button)findViewById(R.id.buttonR);
+        bE.setOnClickListener(new View.OnClickListener() {                        
+                public void onClick(View v) {
+                	chat = refreshChat(festivalId);
+                    c_adapter = new FestAdapter(Chat.this,
+            				android.R.layout.simple_list_item_1, chat);
+                    setListAdapter(c_adapter);
+                }
+        });
+        
         chat = refreshChat(festivalId);
         c_adapter = new FestAdapter(this,
 				android.R.layout.simple_list_item_1, chat);
