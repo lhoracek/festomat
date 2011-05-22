@@ -1,13 +1,21 @@
 package cz.festomat.client;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import cz.festomat.client.data.CommentBean;
+import cz.festomat.client.data.DataSource;
+import cz.festomat.client.data.IDataSource;
 import android.app.ListActivity;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class Chat extends ListActivity {
@@ -15,19 +23,48 @@ public class Chat extends ListActivity {
 	private ArrayList<Fest> chat = null;
 	private FestAdapter c_adapter;
 	
+	private CharSequence autor = "";
+	private CharSequence text = "";
+	
+	
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat);
         
-        chat = refreshChat();
+        Bundle festivalBund = getIntent().getExtras();
+        final String festivalId = festivalBund.getString("festivalId");
+        
+        final EditText aut = (EditText)findViewById(R.id.editTextA);
+        final EditText msg = (EditText)findViewById(R.id.editTextM);
+        aut.setHint("autor");
+        msg.setHint("text zpravy...");
+        Button b = (Button)findViewById(R.id.buttonS);
+        b.setOnClickListener(new View.OnClickListener() {                        
+                public void onClick(View v) {
+                	autor = aut.getText();
+                	text = msg.getText();
+                	CommentBean bean = new CommentBean(autor.toString(), new Date(), text.toString());
+                	IDataSource source = DataSource.getInstance();
+                	source.sendComment(festivalId,bean);
+                }
+        });
+        
+        chat = refreshChat(festivalId);
         c_adapter = new FestAdapter(this,
 				android.R.layout.simple_list_item_1, chat);
         setListAdapter(c_adapter);
     }
     
-    public ArrayList<Fest> refreshChat() {
+    public ArrayList<Fest> refreshChat(String idFest) {
+    	IDataSource source = DataSource.getInstance();
     	ArrayList<Fest> chat = new ArrayList<Fest>();
-    	chat.add(new Fest(1,"zelena"));
+    	List<CommentBean> raw = new ArrayList<CommentBean>();
+    	CommentBean row;
+    	raw = source.getAllComments(idFest);
+    	for (int i = 0; i < raw.size(); i++) {
+    		row = raw.get(i);
+    		chat.add(new Fest(i,row.getAuthor()+" "+row.getTime()+" "+row.getText()));
+    	}
     	return chat;
     }
     

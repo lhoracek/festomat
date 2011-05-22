@@ -2,6 +2,7 @@ package cz.festomat.client.data;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -45,6 +46,9 @@ public class DataSourceImpl implements IDataSource {
 		List<CommentBean> list =
 			(List<CommentBean>)rc.getData(festivalId + "/comments",
 					new TypeToken<List<CommentBean>>(){}.getType());
+		if(list == null){
+			list = Collections.EMPTY_LIST;
+		}
 		return list;
 	}
 
