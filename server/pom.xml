@@ -417,6 +417,12 @@
        <artifactId>gaecontainer</artifactId>
        <version>0.6.1</version>
     </dependency>
+    
+	<dependency>
+	    <groupId>com.google.code.gson</groupId>
+	    <artifactId>gson</artifactId>
+	    <version>1.7.1</version>
+	</dependency>
 
     <!--
       J2EE Servlet API. We need it to compile IndexServlet class. You
