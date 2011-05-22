@@ -53,11 +53,11 @@ public class DataSourceImplTest implements IDataSource {
 		return festivals.get(id);
 	}
 
-	public List<CommentBean> getAllComments() {
+	public List<CommentBean> getAllComments(String festivalId) {
 		return comments;
 	}
 
-	public void sendComment(CommentBean comment) {
+	public void sendComment(String festivalId, CommentBean comment) {
 		// TODO Auto-generated method stub
 		Log.i("DATA", "sending comments: " + comment.getText());
 	}
