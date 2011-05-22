@@ -8,10 +8,19 @@ import android.os.Bundle;
 import android.widget.TabHost;
 
 public class Festival extends TabActivity {
+	
+	private String festivalId = null;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.festival);
+        
+        festivalId = getIntent().getExtras().getString("festivalId");
+        
+        Bundle bundle = new Bundle();
+        bundle.putString("festivalId", festivalId);
+        
         Resources res = getResources(); // Resource object to get Drawables
 	    TabHost tabHost = getTabHost();  // The activity TabHost
 	    TabHost.TabSpec spec;  // Resusable TabSpec for each tab
@@ -19,6 +28,7 @@ public class Festival extends TabActivity {
 
 	    // Create an Intent to launch an Activity for the tab (to be reused)
 	    intent = new Intent().setClass(this, Program.class);
+	    intent.putExtras(bundle);
 
 	    // Initialize a TabSpec for each tab and add it to the TabHost
 	    spec = tabHost.newTabSpec("program").setIndicator("Program",
