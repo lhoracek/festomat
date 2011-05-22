@@ -1,15 +1,62 @@
 package cz.festomat.client;
 
-import android.app.Activity;
+import java.util.ArrayList;
+import android.app.ListActivity;
+import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class Chat extends Activity {
+public class Chat extends ListActivity {
+	
+	private ArrayList<Fest> chat = null;
+	private FestAdapter c_adapter;
+	
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        TextView textview = new TextView(this);
-        textview.setText("This is the Chat tab");
-        setContentView(textview);
+        setContentView(R.layout.chat);
+        
+        chat = refreshChat();
+        c_adapter = new FestAdapter(this,
+				android.R.layout.simple_list_item_1, chat);
+        setListAdapter(c_adapter);
     }
+    
+    public ArrayList<Fest> refreshChat() {
+    	ArrayList<Fest> chat = new ArrayList<Fest>();
+    	chat.add(new Fest(1,"zelena"));
+    	return chat;
+    }
+    
+    private class FestAdapter extends ArrayAdapter<Fest> {
+
+		private ArrayList<Fest> items;
+
+		public FestAdapter(Context context, int textViewResourceId,
+				ArrayList<Fest> items) {
+			super(context, textViewResourceId, items);
+			this.items = items;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			View v = convertView;
+			if (v == null) {
+				LayoutInflater vi = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				v = vi.inflate(android.R.layout.simple_list_item_1, null);
+
+			}
+			Fest o = items.get(position);
+			if (o != null) {
+				TextView tt = (TextView) v.findViewById(android.R.id.text1);
+				if (tt != null) {
+					tt.setText(o.getName());
+				}
+			}
+			return v;
+		}
+	}
 }
