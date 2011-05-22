@@ -1,11 +1,13 @@
 package cz.festomat.client;
 
-import cz.festomat.client.data.DataSourceImpl;
+
+import cz.festomat.client.data.DataSource;
 import cz.festomat.client.data.DataSourceImplTest;
-import cz.festomat.client.data.FestivalBean;
+import cz.festomat.client.data.IDataSource;
+
 
 import java.util.ArrayList;
-import java.util.Collection;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,6 +23,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -35,9 +38,11 @@ public class FestivalList extends ListActivity {
 	private Map<String,String> filteredFestNames = null;
 	//private ArrayList<String> names = null;
 
-	private DataSourceImplTest ds;
+	private IDataSource source;
 	
 	private FestAdapter f_adapter;
+	
+	private EditText search;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -51,8 +56,10 @@ public class FestivalList extends ListActivity {
 				filtered);
 		setListAdapter(f_adapter);
 
-		((EditText) findViewById(R.id.search))
-				.addTextChangedListener(new TextWatcher() {
+		EditText search = ((EditText) findViewById(R.id.search)); 
+		
+		
+				search.addTextChangedListener(new TextWatcher() {
 
 					public void afterTextChanged(Editable s) {
 						Log.d(TAG, "afterTextChanged");
@@ -100,7 +107,7 @@ public class FestivalList extends ListActivity {
 		else {
 //			filtered = new ArrayList<String>(festivals);
 			filtered = new ArrayList<String>(new ArrayList<String>(festNames.values()));
-			filteredFestNames = ds.getAllFestivalls();
+			filteredFestNames = source.getAllFestivalls();
 		}
 		f_adapter = new FestAdapter(FestivalList.this,
 				android.R.layout.simple_list_item_1, filtered);
@@ -109,13 +116,14 @@ public class FestivalList extends ListActivity {
 	
 	public void loadFests() {
 		Log.i(TAG,"loadFests");
-		ds = new DataSourceImplTest();
 		
+		
+		 source = DataSource.getInstance();
 		
 		festNames = 
-			ds.getAllFestivalls();
+			source.getAllFestivalls();
 		filteredFestNames = 
-			ds.getAllFestivalls();
+			source.getAllFestivalls();
 	
 		
 		
@@ -129,6 +137,9 @@ public class FestivalList extends ListActivity {
 	
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 
+//		InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+//		imm.hideSoftInputFromWindow(search.getWindowToken(), 0);
+		
 		Bundle bundle = new Bundle();
 
 		ArrayList<String> keys = new ArrayList<String>(festNames.keySet());

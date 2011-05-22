@@ -2,5 +2,5 @@
 <resources>
     <string name="hello">Hello World, FestivalList!</string>
     <string name="app_name">Festomat</string>
-     <string name="empty_list">Prazdny seznam</string>
+     <string name="empty_list">Nenalezen žádný festival!</string>
 </resources>
