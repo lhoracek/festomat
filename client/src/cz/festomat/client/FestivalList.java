@@ -56,7 +56,7 @@ public class FestivalList extends ListActivity {
 				filtered);
 		setListAdapter(f_adapter);
 
-		EditText search = ((EditText) findViewById(R.id.search)); 
+		search = ((EditText) findViewById(R.id.search)); 
 		
 		
 				search.addTextChangedListener(new TextWatcher() {
@@ -137,8 +137,8 @@ public class FestivalList extends ListActivity {
 	
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 
-//		InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-//		imm.hideSoftInputFromWindow(search.getWindowToken(), 0);
+		InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.hideSoftInputFromWindow(search.getWindowToken(), 0);
 		
 		Bundle bundle = new Bundle();
 
