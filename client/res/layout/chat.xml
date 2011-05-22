@@ -9,7 +9,7 @@
 		android:layout_width="fill_parent" 
 		android:layout_height="wrap_content"
 		android:layout_toLeftOf="@+id/buttonS"
-        android:layout_marginLeft="5dip"></EditText>
+        android:layout_marginLeft="5dip" android:hint="Přezdívka"></EditText>
 	<Button android:text="Send"
 	    android:id="@+id/buttonS"
 		android:layout_width="wrap_content"
@@ -21,11 +21,10 @@
 		android:layout_height="wrap_content"
 		android:layout_alignParentRight="true"
 		android:layout_marginLeft="5dip"></Button>
-	<EditText android:text="text" 
-	    android:id="@+id/editTextM"
+	<EditText android:id="@+id/editTextM"
 		android:layout_width="fill_parent" 
 		android:layout_height="wrap_content"
-		android:layout_below="@+id/editTextA"></EditText>
+		android:layout_below="@+id/editTextA" android:hint="Text zprávy"></EditText>
 
 	<ListView android:id="@+id/android:list"
 	    android:layout_width="fill_parent"
