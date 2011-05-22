@@ -1,0 +1,88 @@
+<classpath>
+  <classpathentry kind="src" path="src/main/java" including="**/*.java"/>
+  <classpathentry kind="src" path="src/main/resources" excluding="**/*.java"/>
+  <classpathentry kind="output" path="target/classes"/>
+  <classpathentry kind="var" path="M2_REPO/javax/jdo/jdo2-api/2.3-eb/jdo2-api-2.3-eb.jar" sourcepath="M2_REPO/javax/jdo/jdo2-api/2.3-eb/jdo2-api-2.3-eb-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/Luboš%20Horáček/.m2/repository/javax/jdo/jdo2-api/2.3-eb/jdo2-api-2.3-eb-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/javax/transaction/jta/1.1/jta-1.1.jar" sourcepath="M2_REPO/javax/transaction/jta/1.1/jta-1.1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/javax/persistence/persistence-api/1.0/persistence-api-1.0.jar" sourcepath="M2_REPO/javax/persistence/persistence-api/1.0/persistence-api-1.0-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/Luboš%20Horáček/.m2/repository/javax/persistence/persistence-api/1.0/persistence-api-1.0-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/com/google/appengine/appengine-api-1.0-sdk/1.4.0/appengine-api-1.0-sdk-1.4.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/google/appengine/appengine-api-labs/1.4.0/appengine-api-labs-1.4.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/google/appengine/appengine-api-stubs/1.4.0/appengine-api-stubs-1.4.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/google/appengine/appengine-jsr107cache/1.4.0/appengine-jsr107cache-1.4.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/google/appengine/appengine-testing/1.4.0/appengine-testing-1.4.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4.jar" sourcepath="M2_REPO/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/Luboš%20Horáček/.m2/repository/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/com/google/appengine/orm/datanucleus-appengine/1.0.8/datanucleus-appengine-1.0.8.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/datanucleus/datanucleus-core/1.1.5/datanucleus-core-1.1.5.jar" sourcepath="M2_REPO/org/datanucleus/datanucleus-core/1.1.5/datanucleus-core-1.1.5-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/datanucleus/datanucleus-jpa/1.1.5/datanucleus-jpa-1.1.5.jar" sourcepath="M2_REPO/org/datanucleus/datanucleus-jpa/1.1.5/datanucleus-jpa-1.1.5-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/net/sf/ehcache/ehcache-core/1.7.0/ehcache-core-1.7.0.jar" sourcepath="M2_REPO/net/sf/ehcache/ehcache-core/1.7.0/ehcache-core-1.7.0-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/Luboš%20Horáček/.m2/repository/net/sf/ehcache/ehcache-core/1.7.0/ehcache-core-1.7.0-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/net/sf/ehcache/ehcache-jcache/1.2/ehcache-jcache-1.2.jar" sourcepath="M2_REPO/net/sf/ehcache/ehcache-jcache/1.2/ehcache-jcache-1.2-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/Luboš%20Horáček/.m2/repository/net/sf/ehcache/ehcache-jcache/1.2/ehcache-jcache-1.2-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/fi/abo/gaecontainer/0.6.1/gaecontainer-0.6.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/geronimo/specs/geronimo-jpa_3.0_spec/1.1.1/geronimo-jpa_3.0_spec-1.1.1.jar" sourcepath="M2_REPO/org/apache/geronimo/specs/geronimo-jpa_3.0_spec/1.1.1/geronimo-jpa_3.0_spec-1.1.1-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/Luboš%20Horáček/.m2/repository/org/apache/geronimo/specs/geronimo-jpa_3.0_spec/1.1.1/geronimo-jpa_3.0_spec-1.1.1-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/apache/geronimo/specs/geronimo-servlet_2.5_spec/1.2/geronimo-servlet_2.5_spec-1.2.jar" sourcepath="M2_REPO/org/apache/geronimo/specs/geronimo-servlet_2.5_spec/1.2/geronimo-servlet_2.5_spec-1.2-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/Luboš%20Horáček/.m2/repository/org/apache/geronimo/specs/geronimo-servlet_2.5_spec/1.2/geronimo-servlet_2.5_spec-1.2-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/com/google/gwt/gwt-servlet/2.1.0/gwt-servlet-2.1.0.jar" sourcepath="M2_REPO/com/google/gwt/gwt-servlet/2.1.0/gwt-servlet-2.1.0-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/Luboš%20Horáček/.m2/repository/com/google/gwt/gwt-servlet/2.1.0/gwt-servlet-2.1.0-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0.jar" sourcepath="M2_REPO/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/Luboš%20Horáček/.m2/repository/com/google/gwt/gwt-user/2.1.0/gwt-user-2.1.0-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/net/sf/jsr107cache/jsr107cache/1.1/jsr107cache-1.1.jar" sourcepath="M2_REPO/net/sf/jsr107cache/jsr107cache/1.1/jsr107cache-1.1-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/Luboš%20Horáček/.m2/repository/net/sf/jsr107cache/jsr107cache/1.1/jsr107cache-1.1-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/junit/junit/4.5/junit-4.5.jar" sourcepath="M2_REPO/junit/junit/4.5/junit-4.5-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/ch/qos/logback/logback-classic/0.9.22/logback-classic-0.9.22.jar" sourcepath="M2_REPO/ch/qos/logback/logback-classic/0.9.22/logback-classic-0.9.22-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/Luboš%20Horáček/.m2/repository/ch/qos/logback/logback-classic/0.9.22/logback-classic-0.9.22-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/ch/qos/logback/logback-core/0.9.22/logback-core-0.9.22.jar" sourcepath="M2_REPO/ch/qos/logback/logback-core/0.9.22/logback-core-0.9.22-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/Luboš%20Horáček/.m2/repository/ch/qos/logback/logback-core/0.9.22/logback-core-0.9.22-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-api/1.6.0/slf4j-api-1.6.0.jar" sourcepath="M2_REPO/org/slf4j/slf4j-api/1.6.0/slf4j-api-1.6.0-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/Luboš%20Horáček/.m2/repository/org/slf4j/slf4j-api/1.6.0/slf4j-api-1.6.0-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/taglibs/standard/1.1.2/standard-1.1.2.jar" sourcepath="M2_REPO/taglibs/standard/1.1.2/standard-1.1.2-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/vaadin/vaadin/6.5.2/vaadin-6.5.2.jar" sourcepath="M2_REPO/com/vaadin/vaadin/6.5.2/vaadin-6.5.2-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/Luboš%20Horáček/.m2/repository/com/vaadin/vaadin/6.5.2/vaadin-6.5.2-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+</classpath>

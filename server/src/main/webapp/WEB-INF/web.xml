@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+	<display-name>Pluto</display-name>
+
+	<context-param>
+		<description>Vaadin production mode</description>
+		<param-name>productionMode</param-name>
+		<param-value>false</param-value>
+	</context-param>
+
+	<!-- Servlets -->
+
+	<servlet>
+		<servlet-name>import</servlet-name>
+		<servlet-class>cz.festomat.server.servlets.ImportServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>VaadinServlet</servlet-name>
+		<servlet-class>com.vaadin.terminal.gwt.server.GAEApplicationServlet</servlet-class>
+		<init-param>
+			<param-name>application</param-name>
+			<param-value>cz.festomat.server.Admin</param-value>
+		</init-param>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>import</servlet-name>
+		<url-pattern>/import</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>VaadinServlet</servlet-name>
+		<url-pattern>/admin/*</url-pattern>
+	</servlet-mapping>
+
+	<!-- Default page to serve -->
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+
+
+	<security-constraint>
+		<web-resource-collection>
+			<url-pattern>/admin/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>admin</role-name>
+		</auth-constraint>
+	</security-constraint>
+</web-app>
