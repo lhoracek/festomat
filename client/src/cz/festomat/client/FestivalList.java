@@ -2,6 +2,7 @@ package cz.festomat.client;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import android.app.ListActivity;
@@ -126,7 +127,7 @@ public class FestivalList extends ListActivity {
 
 		Bundle bundle = new Bundle();
 
-		ArrayList<String> keys = new ArrayList<String>(festNames.keySet());
+		List<String> keys = new ArrayList<String>(festNames.keySet());
 
 		String fid = keys.get(position);
 
@@ -166,9 +167,7 @@ public class FestivalList extends ListActivity {
 			progressDialog.dismiss();
 			f_adapter = new FestAdapter(FestivalList.this, android.R.layout.simple_list_item_1, filtered);
 			setListAdapter(f_adapter);
-
 		}
-
 	}
 
 	private class FestAdapter extends ArrayAdapter<String> {
