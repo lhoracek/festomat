@@ -1,5 +1,6 @@
 package cz.festomat.client;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -90,7 +91,7 @@ public class Chat extends ListActivity {
 			View v = convertView;
 			if (v == null) {
 				LayoutInflater vi = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				v = vi.inflate(android.R.layout.simple_list_item_1, null);
+				v = vi.inflate(R.layout.c_chat_item_layout, null);
 
 			}
 			CommentBean o = items.get(position);
@@ -98,10 +99,13 @@ public class Chat extends ListActivity {
 			// TODO sestavit hezke view
 
 			if (o != null) {
-				TextView tt = (TextView) v.findViewById(android.R.id.text1);
-				if (tt != null) {
-					tt.setText(o.getText());
-				}
+				TextView tt1 = (TextView) v.findViewById(R.id.author);
+				tt1.setText(o.getAuthor());
+				TextView tt2 = (TextView) v.findViewById(R.id.datum);
+				tt2.setText(SimpleDateFormat.getInstance().format(o.getTime()));
+				TextView tt3 = (TextView) v.findViewById(R.id.text);
+				tt3.setText(o.getText());
+
 			}
 			return v;
 		}
