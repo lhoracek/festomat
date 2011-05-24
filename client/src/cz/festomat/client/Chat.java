@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import android.app.ListActivity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -29,8 +30,10 @@ public class Chat extends ListActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.chat);
 
+		showWaitDialog();
+		
+		setContentView(R.layout.chat);
 		Bundle festivalBund = getIntent().getExtras();
 		final String festivalId = festivalBund.getString("festivalId");
 
@@ -52,15 +55,19 @@ public class Chat extends ListActivity {
 		bE.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				showWaitDialog();
 				chat = refreshChat(festivalId);
 				c_adapter = new CommentAdapter(Chat.this, android.R.layout.simple_list_item_1, chat);
 				setListAdapter(c_adapter);
+				hideWaitDialog();
 			}
 		});
 
 		chat = refreshChat(festivalId);
 		c_adapter = new CommentAdapter(this, android.R.layout.simple_list_item_1, chat);
 		setListAdapter(c_adapter);
+		hideWaitDialog();
+
 	}
 
 	public List<CommentBean> refreshChat(String idFest) {
@@ -98,5 +105,15 @@ public class Chat extends ListActivity {
 			}
 			return v;
 		}
+	}
+
+	ProgressDialog	progressDialog;
+
+	private void showWaitDialog() {
+		progressDialog = ProgressDialog.show(this, "", "Načítám...", true);
+	}
+
+	private void hideWaitDialog() {
+		progressDialog.dismiss();
 	}
 }

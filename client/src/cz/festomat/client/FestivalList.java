@@ -109,15 +109,12 @@ public class FestivalList extends ListActivity {
 		Log.i(TAG, "loadFests");
 
 		source = DataSource.getInstance();
-
 		festNames = source.getAllFestivalls();
 		filteredFestNames = source.getAllFestivalls();
-
 		festivals = new ArrayList<String>(festNames.values());
-
 		filtered = new ArrayList<String>(festivals);
-
 	}
+
 
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
@@ -138,7 +135,7 @@ public class FestivalList extends ListActivity {
 		Intent i = new Intent(this, Festival.class);
 		i.putExtras(bundle);
 
-		startActivityForResult(i, 0);
+		startActivity(i);
 
 		super.onListItemClick(l, v, position, id);
 

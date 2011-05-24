@@ -1,5 +1,6 @@
 package cz.festomat.client;
 
+import android.app.ProgressDialog;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -14,6 +15,7 @@ public class Festival extends TabActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.festival);
+		showWaitDialog();
 
 		festivalId = getIntent().getExtras().getString("festivalId");
 
@@ -41,6 +43,17 @@ public class Festival extends TabActivity {
 		tabHost.addTab(spec);
 
 		tabHost.setCurrentTab(0);
+		hideWaitDialog();
 
+	}
+
+	ProgressDialog	progressDialog;
+
+	private void showWaitDialog() {
+		progressDialog = ProgressDialog.show(this, "", "Načítám...", true);
+	}
+
+	private void hideWaitDialog() {
+		progressDialog.dismiss();
 	}
 }
