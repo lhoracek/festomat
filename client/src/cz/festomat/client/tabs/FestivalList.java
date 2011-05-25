@@ -183,6 +183,7 @@ public class FestivalList extends ListActivity {
 		Intent myIntent = new Intent();
 		myIntent.putExtra("festivalsArrayList", (Serializable) filtered);
 		this.setIntent(myIntent);
+		super.onPause();
 	}
 
 }
