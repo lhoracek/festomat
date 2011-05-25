@@ -7,14 +7,17 @@
 	<uses-permission android:name="android.permission.INTERNET" />
 
 	<application android:icon="@drawable/icon" android:label="@string/app_name">
-		<activity android:name=".FestivalList" android:label="@string/app_name">
+		<activity android:name=".FestivalSelect" android:label="Festomat">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
+		<activity android:name=".tabs.FestivalList" android:label="@string/app_name" />
+		<activity android:name=".tabs.FestivalMap" android:label="@string/app_name" />
+		
 		<activity android:name=".Festival" android:label="Festival" />
-		<activity android:name=".Program" android:label="Program" />
-		<activity android:name=".Chat" android:label="Chat" />
+		<activity android:name=".tabs.Program" android:label="Program" />
+		<activity android:name=".tabs.Chat" android:label="Chat" />
 	</application>
 </manifest>

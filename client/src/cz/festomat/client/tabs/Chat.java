@@ -1,4 +1,4 @@
-package cz.festomat.client;
+package cz.festomat.client.tabs;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,6 +16,9 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import cz.festomat.client.R;
+import cz.festomat.client.R.id;
+import cz.festomat.client.R.layout;
 import cz.festomat.client.data.DataSource;
 import cz.festomat.client.data.IDataSource;
 import cz.festomat.client.data.beans.CommentBean;

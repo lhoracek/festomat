@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.widget.TabHost;
+import cz.festomat.client.data.DataSource;
+import cz.festomat.client.tabs.Chat;
+import cz.festomat.client.tabs.Program;
 
 public class Festival extends TabActivity {
 
@@ -18,6 +21,7 @@ public class Festival extends TabActivity {
 		showWaitDialog();
 
 		festivalId = getIntent().getExtras().getString("festivalId");
+		this.setTitle(DataSource.getInstance().getFestivalById(festivalId).getName());
 
 		Bundle bundle = new Bundle();
 		bundle.putString("festivalId", festivalId);

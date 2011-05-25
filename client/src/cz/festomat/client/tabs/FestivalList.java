@@ -1,5 +1,6 @@
-package cz.festomat.client;
+package cz.festomat.client.tabs;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,8 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import cz.festomat.client.Festival;
+import cz.festomat.client.R;
 import cz.festomat.client.data.DataSource;
 import cz.festomat.client.data.IDataSource;
 import cz.festomat.client.data.beans.FestivalListBean;
@@ -96,9 +99,7 @@ public class FestivalList extends ListActivity {
 		Log.i(TAG, "loadFests");
 
 		source = DataSource.getInstance();
-
-		festivals = source.getAllFestivalls();
-		filtered = source.getAllFestivalls();
+		filtered = new ArrayList<FestivalListBean>(festivals = source.getAllFestivalls());
 	}
 
 
@@ -109,7 +110,7 @@ public class FestivalList extends ListActivity {
 		imm.hideSoftInputFromWindow(search.getWindowToken(), 0);
 
 		Bundle bundle = new Bundle();
-		bundle.putString("festivalId", ((FestivalListBean) l.getSelectedItem()).getName());
+		bundle.putString("festivalId", ((FestivalListBean) getListAdapter().getItem(position)).getName());
 
 		Intent i = new Intent(this, Festival.class);
 		i.putExtras(bundle);
@@ -174,6 +175,14 @@ public class FestivalList extends ListActivity {
 			}
 			return v;
 		}
+	}
+
+	/** Called when the activity looses focus **/
+	@Override
+	public void onPause() {
+		Intent myIntent = new Intent();
+		myIntent.putExtra("festivalsArrayList", (Serializable) filtered);
+		this.setIntent(myIntent);
 	}
 
 }

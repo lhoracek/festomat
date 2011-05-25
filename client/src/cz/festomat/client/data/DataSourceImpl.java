@@ -3,7 +3,9 @@ package cz.festomat.client.data;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -35,11 +37,17 @@ public class DataSourceImpl implements IDataSource {
 		}.getType());
 	}
 
+	Map<String, FestivalBean>	festivals	= new HashMap<String, FestivalBean>();
+
 	@Override
 	public FestivalBean getFestivalById(String id) {
-		FestivalBean fb = (FestivalBean) rc.getData(id, new TypeToken<FestivalBean>() {
-		}.getType());
-		return fb;
+		if (!festivals.containsKey(id)) {
+			FestivalBean fb = (FestivalBean) rc.getData(id, new TypeToken<FestivalBean>() {
+			}.getType());
+			festivals.put(id, fb);
+		}
+
+		return festivals.get(id);
 	}
 
 	@Override
