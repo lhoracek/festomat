@@ -1,9 +1,7 @@
 package cz.festomat.client;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import android.app.ListActivity;
 import android.app.ProgressDialog;
@@ -24,14 +22,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import cz.festomat.client.data.DataSource;
 import cz.festomat.client.data.IDataSource;
+import cz.festomat.client.data.beans.FestivalListBean;
 
 public class FestivalList extends ListActivity {
 	public static final String	TAG					= "Festomat";
-	private ArrayList<String>	festivals			= null;
-	private ArrayList<String>	filtered			= null;
-
-	private Map<String, String>	festNames			= null;
-	private Map<String, String>	filteredFestNames	= null;
+	private List<FestivalListBean>		festivals			= null;
+	private List<FestivalListBean>		filtered			= null;
 	// private ArrayList<String> names = null;
 
 	private IDataSource			source;
@@ -45,8 +41,8 @@ public class FestivalList extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		festivals = new ArrayList<String>();
-		filtered = new ArrayList<String>();
+		festivals = new ArrayList<FestivalListBean>();
+		filtered = new ArrayList<FestivalListBean>();
 
 		f_adapter = new FestAdapter(this, android.R.layout.simple_list_item_1, filtered);
 		setListAdapter(f_adapter);
@@ -79,27 +75,18 @@ public class FestivalList extends ListActivity {
 
 		if (!text.equals("")) {
 			filtered.clear();
-			filteredFestNames = new HashMap<String, String>();
 			int i = 0;
-			String currentFest = null;
 
-			ArrayList<String> keys = new ArrayList<String>(festNames.keySet());
-
-			for (i = 0; i < keys.size(); i++) {
-				// currentFest = festivals.get(i);
-				currentFest = festNames.get(keys.get(i));
-
-				if (currentFest.toLowerCase().contains(text.toLowerCase())) {
-					filtered.add(currentFest);
-					filteredFestNames.put(keys.get(i), currentFest);
+			for (FestivalListBean fb : festivals) {
+				if (fb.getName().toLowerCase().contains(text.toLowerCase())) {
+					filtered.add(fb);
 				}
 
 			}
 
 		} else {
-			// filtered = new ArrayList<String>(festivals);
-			filtered = new ArrayList<String>(new ArrayList<String>(festNames.values()));
-			filteredFestNames = source.getAllFestivalls();
+			filtered.clear();
+			filtered.addAll(festivals);
 		}
 		f_adapter = new FestAdapter(FestivalList.this, android.R.layout.simple_list_item_1, filtered);
 		setListAdapter(f_adapter);
@@ -109,10 +96,9 @@ public class FestivalList extends ListActivity {
 		Log.i(TAG, "loadFests");
 
 		source = DataSource.getInstance();
-		festNames = source.getAllFestivalls();
-		filteredFestNames = source.getAllFestivalls();
-		festivals = new ArrayList<String>(festNames.values());
-		filtered = new ArrayList<String>(festivals);
+
+		festivals = source.getAllFestivalls();
+		filtered = source.getAllFestivalls();
 	}
 
 
@@ -123,14 +109,7 @@ public class FestivalList extends ListActivity {
 		imm.hideSoftInputFromWindow(search.getWindowToken(), 0);
 
 		Bundle bundle = new Bundle();
-
-		List<String> keys = new ArrayList<String>(festNames.keySet());
-
-		String fid = keys.get(position);
-
-		Log.i(TAG, "posilam:" + position + " " + fid);
-
-		bundle.putString("festivalId", fid);
+		bundle.putString("festivalId", ((FestivalListBean) l.getSelectedItem()).getName());
 
 		Intent i = new Intent(this, Festival.class);
 		i.putExtras(bundle);
@@ -167,11 +146,11 @@ public class FestivalList extends ListActivity {
 		}
 	}
 
-	private class FestAdapter extends ArrayAdapter<String> {
+	private class FestAdapter extends ArrayAdapter<FestivalListBean> {
 
-		private final ArrayList<String>	items;
+		private final List<FestivalListBean>	items;
 
-		public FestAdapter(Context context, int textViewResourceId, ArrayList<String> items) {
+		public FestAdapter(Context context, int textViewResourceId, List<FestivalListBean> items) {
 			super(context, textViewResourceId, items);
 			this.items = items;
 		}
@@ -184,11 +163,13 @@ public class FestivalList extends ListActivity {
 				v = vi.inflate(android.R.layout.simple_list_item_1, null);
 
 			}
-			String o = items.get(position);
+
+			FestivalListBean o = items.get(position);
+
 			if (o != null) {
 				TextView tt = (TextView) v.findViewById(android.R.id.text1);
 				if (tt != null) {
-					tt.setText(o);
+					tt.setText(o.getName());
 				}
 			}
 			return v;

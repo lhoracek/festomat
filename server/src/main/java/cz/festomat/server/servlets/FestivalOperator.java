@@ -8,8 +8,7 @@ import java.io.PrintWriter;
 import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javax.jdo.PersistenceManager;
@@ -24,6 +23,7 @@ import com.google.gson.Gson;
 
 import cz.festomat.server.bean.CommentBean;
 import cz.festomat.server.bean.FestivalBean;
+import cz.festomat.server.bean.FestivalListBean;
 import cz.festomat.server.model.Comment;
 import cz.festomat.server.model.Festival;
 
@@ -66,9 +66,10 @@ public class FestivalOperator extends HttpServlet {
 			Query q = PMF.getManager().newQuery(Festival.class);
 			Collection<Festival> result = (Collection) q.execute();
 
-			Map obj = new LinkedHashMap();
+			List<FestivalListBean> obj = new ArrayList<FestivalListBean>();
 			for (Festival f : result) {
-				obj.put(KeyFactory.keyToString(f.getKey()), removeDiacritics(f.getJmeno()));
+				obj.add(new FestivalListBean(KeyFactory.keyToString(f.getKey()), removeDiacritics(f.getJmeno()), f
+						.getLng(), f.getLat(), f.getZacaten()));
 			}
 
 			Gson gson = new Gson();

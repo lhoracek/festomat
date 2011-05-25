@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -18,35 +17,37 @@ import org.apache.http.message.BasicNameValuePair;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import cz.festomat.client.data.beans.CommentBean;
+import cz.festomat.client.data.beans.FestivalBean;
+import cz.festomat.client.data.beans.FestivalListBean;
+
 public class DataSourceImpl implements IDataSource {
 
-	RestClient rc;
-	
+	RestClient	rc;
+
 	public DataSourceImpl() {
 		rc = new RestClient();
 	}
-	
+
 	@Override
-	public Map<String, String> getAllFestivalls() {
-		Map<String, String> map =
-			(Map<String, String>)rc.getData("list",
-					new TypeToken<Map<String, String>>(){}.getType());
-		return map;
+	public List<FestivalListBean> getAllFestivalls() {
+		return (List<FestivalListBean>) rc.getData("list", new TypeToken<List<FestivalListBean>>() {
+		}.getType());
 	}
 
 	@Override
 	public FestivalBean getFestivalById(String id) {
-		FestivalBean fb = (FestivalBean)rc.getData(id,
-				new TypeToken<FestivalBean>(){}.getType());
+		FestivalBean fb = (FestivalBean) rc.getData(id, new TypeToken<FestivalBean>() {
+		}.getType());
 		return fb;
 	}
 
 	@Override
 	public List<CommentBean> getAllComments(String festivalId) {
-		List<CommentBean> list =
-			(List<CommentBean>)rc.getData(festivalId + "/comments",
-					new TypeToken<List<CommentBean>>(){}.getType());
-		if(list == null){
+		List<CommentBean> list = (List<CommentBean>) rc.getData(festivalId + "/comments",
+				new TypeToken<List<CommentBean>>() {
+				}.getType());
+		if (list == null) {
 			list = Collections.EMPTY_LIST;
 		}
 		return list;
@@ -56,7 +57,7 @@ public class DataSourceImpl implements IDataSource {
 	public void sendComment(String festivalId, CommentBean comment) {
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpPost httppost = new HttpPost(RestClient.BASEURL + festivalId + "/comments/new");
-		
+
 		try {
 			Gson gson = new Gson();
 			// Add your data
@@ -72,9 +73,7 @@ public class DataSourceImpl implements IDataSource {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 		}
-		
+
 	}
 
-	
-	
 }

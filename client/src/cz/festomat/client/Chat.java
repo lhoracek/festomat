@@ -16,9 +16,9 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import cz.festomat.client.data.CommentBean;
 import cz.festomat.client.data.DataSource;
 import cz.festomat.client.data.IDataSource;
+import cz.festomat.client.data.beans.CommentBean;
 
 public class Chat extends ListActivity {
 

@@ -1,4 +1,4 @@
-package cz.festomat.client.data;
+package cz.festomat.client.data.beans;
 
 import java.util.Date;
 
