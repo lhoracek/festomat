@@ -1,17 +1,6 @@
 package cz.festomat.client.tabs;
 
-import java.io.IOException;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
-
 import cz.festomat.client.R;
-import cz.festomat.client.R.id;
-import cz.festomat.client.R.layout;
 import cz.festomat.client.data.DataSource;
 import cz.festomat.client.data.IDataSource;
 import cz.festomat.client.data.beans.FestivalBean;
@@ -19,7 +8,6 @@ import cz.festomat.client.data.beans.FestivalBean;
 import android.app.Activity;
 import android.os.Bundle;
 import android.webkit.WebView;
-import android.widget.TextView;
 
 class ProgramFetcher{
 	private String festivalId;
@@ -54,7 +42,8 @@ class ProgramFetcher{
 }
 
 public class Program extends Activity {
-    public void onCreate(Bundle savedInstanceState) {
+    @Override
+	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.program);

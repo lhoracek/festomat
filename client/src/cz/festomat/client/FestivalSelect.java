@@ -8,8 +8,8 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.widget.TabHost;
-import cz.festomat.client.tabs.Chat;
 import cz.festomat.client.tabs.FestivalList;
+import cz.festomat.client.tabs.FestivalMap;
 
 /**
  * @author Luboš Horáček
@@ -33,7 +33,7 @@ public class FestivalSelect extends TabActivity {
 		tabHost.addTab(spec);
 
 		// Do the same for the other tabs
-		intent = new Intent().setClass(this, Chat.class);
+		intent = new Intent().setClass(this, FestivalMap.class);
 		spec = tabHost.newTabSpec("map").setIndicator("Maps", null).setContent(intent);
 		tabHost.addTab(spec);
 

@@ -1,5 +1,6 @@
 package cz.festomat.client.tabs;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -17,8 +18,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import cz.festomat.client.R;
-import cz.festomat.client.R.id;
-import cz.festomat.client.R.layout;
 import cz.festomat.client.data.DataSource;
 import cz.festomat.client.data.IDataSource;
 import cz.festomat.client.data.beans.CommentBean;
@@ -105,7 +104,7 @@ public class Chat extends ListActivity {
 				TextView tt1 = (TextView) v.findViewById(R.id.author);
 				tt1.setText(o.getAuthor());
 				TextView tt2 = (TextView) v.findViewById(R.id.datum);
-				tt2.setText(SimpleDateFormat.getInstance().format(o.getTime()));
+				tt2.setText(DateFormat.getInstance().format(o.getTime()));
 				TextView tt3 = (TextView) v.findViewById(R.id.text);
 				tt3.setText(o.getText());
 

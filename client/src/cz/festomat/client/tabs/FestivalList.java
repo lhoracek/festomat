@@ -110,7 +110,7 @@ public class FestivalList extends ListActivity {
 		imm.hideSoftInputFromWindow(search.getWindowToken(), 0);
 
 		Bundle bundle = new Bundle();
-		bundle.putString("festivalId", ((FestivalListBean) getListAdapter().getItem(position)).getName());
+		bundle.putString("festivalId", ((FestivalListBean) getListAdapter().getItem(position)).getId());
 
 		Intent i = new Intent(this, Festival.class);
 		i.putExtras(bundle);

@@ -3,10 +3,13 @@
 	package="cz.festomat.client" android:versionCode="1"
 	android:versionName="1.0">
 	<uses-sdk android:minSdkVersion="7" />
-	
-	<uses-permission android:name="android.permission.INTERNET" />
 
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	
 	<application android:icon="@drawable/icon" android:label="@string/app_name">
+		<uses-library android:name="com.google.android.maps" />
 		<activity android:name=".FestivalSelect" android:label="Festomat">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
@@ -15,7 +18,7 @@
 		</activity>
 		<activity android:name=".tabs.FestivalList" android:label="@string/app_name" />
 		<activity android:name=".tabs.FestivalMap" android:label="@string/app_name" />
-		
+
 		<activity android:name=".Festival" android:label="Festival" />
 		<activity android:name=".tabs.Program" android:label="Program" />
 		<activity android:name=".tabs.Chat" android:label="Chat" />

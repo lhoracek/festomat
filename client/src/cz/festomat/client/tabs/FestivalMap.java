@@ -25,6 +25,7 @@ public class FestivalMap extends MapActivity {
 		myIntent = this.getIntent();
 
 		festivals = (List<FestivalListBean>) myIntent.getSerializableExtra("festivalsArrayList");
+		super.onCreate(savedInstanceState);
 	}
 
 	@Override
