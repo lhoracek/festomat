@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.maps.MapActivity;
+import com.google.android.maps.MapView;
 
+import cz.festomat.client.R;
 import cz.festomat.client.data.beans.FestivalListBean;
 
 /**
@@ -18,15 +20,20 @@ import cz.festomat.client.data.beans.FestivalListBean;
 public class FestivalMap extends MapActivity {
 
 	private List<FestivalListBean>	festivals;
+	private MapView					mapView;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.map);
+
+		mapView = (MapView) findViewById(R.id.mapview);
+		mapView.setBuiltInZoomControls(true);
+
 		Intent myIntent = new Intent();
 		myIntent = this.getIntent();
 
 		festivals = (List<FestivalListBean>) myIntent.getSerializableExtra("festivalsArrayList");
-		super.onCreate(savedInstanceState);
-
 	}
 
 	@Override
