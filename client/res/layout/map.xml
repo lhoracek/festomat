@@ -10,7 +10,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:clickable="true"
-        android:apiKey="example_Maps_ApiKey_String"
+        android:apiKey="0UHiEKNwu6nH-dl7rrW5yGHS1FiUgMe-vvSD15g"
     />
 
 </RelativeLayout>
