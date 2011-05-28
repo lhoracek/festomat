@@ -58,16 +58,20 @@ public class FestivalMap extends MapActivity {
 			itemizedOverlay = new FestivalItemizedOverlay(drawable);
 
 			for (FestivalListBean fest : festivals) {
-				int lng = Integer.parseInt(fest.getLng());
-				int lat = Integer.parseInt(fest.getLat());
-				GeoPoint point = new GeoPoint(lng, lat);
+				int lat = convertToMicrodegrees(fest.getLat());
+				int lng = convertToMicrodegrees(fest.getLng());
+				GeoPoint point = new GeoPoint(lat, lng);
 				OverlayItem overlayitem = new OverlayItem(point,
-						fest.getName(), fest.getStart().toString());
+						fest.getName(), ""+fest.getStart());
 				itemizedOverlay.addOverlay(overlayitem);
 			}
 			mapOverlays.add(itemizedOverlay);
 		}
 		super.onResume();
+	}
+	
+	protected int convertToMicrodegrees(String degree) {
+		return Integer.parseInt(degree.replace(".", ""));
 	}
 
 }
