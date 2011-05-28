@@ -34,8 +34,17 @@ public class FestivalMap extends MapActivity {
 		mapView = (MapView) findViewById(R.id.mapview);
 		mapView.setBuiltInZoomControls(true);
 
-		Intent myIntent = new Intent();
-		myIntent = this.getIntent();
+
+	}
+
+	@Override
+	protected boolean isRouteDisplayed() {
+		return false;
+	}
+
+	@Override
+	protected void onResume() {
+		Intent myIntent = getParent().getIntent();
 
 		festivals = (List<FestivalListBean>) myIntent.getSerializableExtra("festivalsArrayList");
 		
@@ -58,10 +67,7 @@ public class FestivalMap extends MapActivity {
 			}
 			mapOverlays.add(itemizedOverlay);
 		}
+		super.onResume();
 	}
 
-	@Override
-	protected boolean isRouteDisplayed() {
-		return false;
-	}
 }

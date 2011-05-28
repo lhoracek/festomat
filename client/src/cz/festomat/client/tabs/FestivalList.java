@@ -180,7 +180,7 @@ public class FestivalList extends ListActivity {
 	/** Called when the activity looses focus **/
 	@Override
 	public void onPause() {
-		Intent myIntent = new Intent();
+		Intent myIntent = getParent().getIntent();
 		myIntent.putExtra("festivalsArrayList", (Serializable) filtered);
 		this.setIntent(myIntent);
 		super.onPause();
