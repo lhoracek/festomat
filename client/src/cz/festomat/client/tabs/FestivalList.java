@@ -121,8 +121,10 @@ public class FestivalList extends ListActivity {
 
 	}
 
+	private ProgressDialog	progressDialog;
+
 	private class LoaderTask extends AsyncTask<Void, Void, Void> {
-		private ProgressDialog	progressDialog;
+
 
 		@Override
 		protected void onPreExecute() {
@@ -180,6 +182,7 @@ public class FestivalList extends ListActivity {
 	/** Called when the activity looses focus **/
 	@Override
 	public void onPause() {
+		progressDialog.dismiss();
 		Intent myIntent = getParent().getIntent();
 		myIntent.putExtra("festivalsArrayList", (Serializable) filtered);
 		this.setIntent(myIntent);
