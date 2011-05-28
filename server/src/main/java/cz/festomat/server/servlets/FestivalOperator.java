@@ -68,8 +68,8 @@ public class FestivalOperator extends HttpServlet {
 
 			List<FestivalListBean> obj = new ArrayList<FestivalListBean>();
 			for (Festival f : result) {
-				obj.add(new FestivalListBean(KeyFactory.keyToString(f.getKey()), removeDiacritics(f.getJmeno()), f
-						.getLng(), f.getLat(), f.getZacaten()));
+				obj.add(new FestivalListBean(KeyFactory.keyToString(f.getKey()), removeDiacritics(f.getJmeno()),
+						normalizeMicrodegree(f.getLng()), normalizeMicrodegree(f.getLat()), f.getZacaten()));
 			}
 
 			Gson gson = new Gson();
@@ -79,8 +79,8 @@ public class FestivalOperator extends HttpServlet {
 			Festival f = PMF.getManager().getObjectById(Festival.class, KeyFactory.stringToKey(uri.split("/")[1]));
 
 			FestivalBean fb = new FestivalBean(KeyFactory.keyToString(f.getKey()), f.getAdresa(),
-					removeDiacritics(f.getJmeno()), f.getLng(), f.getLat(), f.getZacaten(), f.getKonec(),
-					removeDiacritics(f.getPopis()));
+					removeDiacritics(f.getJmeno()), normalizeMicrodegree(f.getLng()), normalizeMicrodegree(f.getLat()),
+					f.getZacaten(), f.getKonec(), removeDiacritics(f.getPopis()));
 
 			Gson gson = new Gson();
 			out.write(gson.toJson(fb));
@@ -117,6 +117,15 @@ public class FestivalOperator extends HttpServlet {
 
 	public static String removeDiacritics(String s) {
 		return Normalizer.normalize(s, Normalizer.Form.NFD).replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
+	}
+
+	private String normalizeMicrodegree(String degree) {
+		String[] tokens = degree.split("\\.");
+		String part = tokens[1].substring(0, Math.min(6, tokens[1].length()));
+		while (part.length() < 6) {
+			part = part + "0";
+		}
+		return tokens[0] + "." + part;
 	}
 
 }
