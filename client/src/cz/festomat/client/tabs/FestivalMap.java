@@ -20,7 +20,7 @@ import cz.festomat.client.data.beans.FestivalListBean;
 public class FestivalMap extends MapActivity {
 
 	private List<FestivalListBean>	festivals;
-	private MapView					mapView;
+	private MapView mapView;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -29,9 +29,8 @@ public class FestivalMap extends MapActivity {
 
 		mapView = (MapView) findViewById(R.id.mapview);
 		mapView.setBuiltInZoomControls(true);
-
-		Intent myIntent = new Intent();
-		myIntent = this.getIntent();
+		
+		Intent myIntent = this.getIntent();
 
 		festivals = (List<FestivalListBean>) myIntent.getSerializableExtra("festivalsArrayList");
 	}
