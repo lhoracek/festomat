@@ -64,7 +64,7 @@ public class DataSourceImpl implements IDataSource {
 	@Override
 	public void sendComment(String festivalId, CommentBean comment) {
 		HttpClient httpclient = new DefaultHttpClient();
-		HttpPost httppost = new HttpPost(RestClient.BASEURL + festivalId + "/comments/new");
+		HttpPost httppost = new HttpPost(RestClient.BASEURL + festivalId + "/comments");
 
 		try {
 			Gson gson = new Gson();
