@@ -33,14 +33,14 @@ import cz.festomat.server.model.Festival;
  */
 public class FestivalOperator extends HttpServlet {
 
-	private static final long	serialVersionUID		= 491455767310850876L;
+	private static final long	serialVersionUID			= 491455767310850876L;
 
-	private final String		uriFestivalDetail		= "^/[a-zA-Z0-9]+$";
-	private final String		uriFestivalComments		= "^/[a-zA-Z0-9]+/comments$";
-	private final String		uriFestivalList			= "^/list$";
-	private final String		uriFestivalCommentNew	= "^/[a-zA-Z0-9]+/comments/new$";
+	private final String		uriFestivalDetail			= "^/[a-zA-Z0-9]+$";
+	private final String		uriFestivalComments			= "^/[a-zA-Z0-9]+/comments$";
+	private final String		uriFestivalList				= "^/list$";
+	private final String		uriFestivalCommentNew		= "^/[a-zA-Z0-9]+/comments$";
 
-	private static final Logger	log						= Logger.getLogger(FestivalOperator.class.getName());
+	private static final Logger	log							= Logger.getLogger(FestivalOperator.class.getName());
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -56,7 +56,13 @@ public class FestivalOperator extends HttpServlet {
 			Collection<CommentBean> obj = new ArrayList<CommentBean>();
 
 			for (Comment c : f.getKomentare()) {
-				obj.add(new CommentBean(c.getAutor(), c.getTime(), c.getText()));
+				if (req.getParameterMap().keySet().contains("search")) {
+					if (c.getText().contains(req.getParameter("search"))) {
+						obj.add(new CommentBean(c.getAutor(), c.getTime(), c.getText()));
+					}
+				} else {
+					obj.add(new CommentBean(c.getAutor(), c.getTime(), c.getText()));
+				}
 			}
 
 			Gson gson = new Gson();
