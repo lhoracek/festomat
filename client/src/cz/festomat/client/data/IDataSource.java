@@ -8,11 +8,13 @@ import cz.festomat.client.data.beans.FestivalListBean;
 
 public interface IDataSource {
 
-	List<FestivalListBean> getAllFestivalls();
-	
-	FestivalBean getFestivalById(String id);
-	
-	List<CommentBean> getAllComments(String festivalId);
-	
-	void sendComment(String festivalId, CommentBean comment);
+  List<FestivalListBean> getAllFestivalls();
+
+  FestivalBean getFestivalById(String id);
+
+  List<CommentBean> getAllComments(String festivalId);
+
+  List<CommentBean> getFilteredComments(String festivalId, String needle);
+
+  void sendComment(String festivalId, CommentBean comment);
 }

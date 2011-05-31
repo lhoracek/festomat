@@ -25,63 +25,74 @@ import cz.festomat.client.data.beans.FestivalListBean;
 
 public class DataSourceImpl implements IDataSource {
 
-	RestClient	rc;
+  RestClient rc;
 
-	public DataSourceImpl() {
-		rc = new RestClient();
-	}
+  public DataSourceImpl() {
+    rc = new RestClient();
+  }
 
-	@Override
-	public List<FestivalListBean> getAllFestivalls() {
-		return (List<FestivalListBean>) rc.getData("list", new TypeToken<List<FestivalListBean>>() {
-		}.getType());
-	}
+  @Override
+  public List<FestivalListBean> getAllFestivalls() {
+    return (List<FestivalListBean>) rc.getData("list", new TypeToken<List<FestivalListBean>>() {
+    }.getType());
+  }
 
-	Map<String, FestivalBean>	festivals	= new HashMap<String, FestivalBean>();
+  Map<String, FestivalBean> festivals = new HashMap<String, FestivalBean>();
 
-	@Override
-	public FestivalBean getFestivalById(String id) {
-		if (!festivals.containsKey(id)) {
-			FestivalBean fb = (FestivalBean) rc.getData(id, new TypeToken<FestivalBean>() {
-			}.getType());
-			festivals.put(id, fb);
-		}
+  @Override
+  public FestivalBean getFestivalById(String id) {
+    if (!festivals.containsKey(id)) {
+      FestivalBean fb = (FestivalBean) rc.getData(id, new TypeToken<FestivalBean>() {
+      }.getType());
+      festivals.put(id, fb);
+    }
 
-		return festivals.get(id);
-	}
+    return festivals.get(id);
+  }
 
-	@Override
-	public List<CommentBean> getAllComments(String festivalId) {
-		List<CommentBean> list = (List<CommentBean>) rc.getData(festivalId + "/comments",
-				new TypeToken<List<CommentBean>>() {
-				}.getType());
-		if (list == null) {
-			list = Collections.EMPTY_LIST;
-		}
-		return list;
-	}
+  @Override
+  public List<CommentBean> getAllComments(String festivalId) {
+    List<CommentBean> list = (List<CommentBean>) rc.getData(festivalId + "/comments",
+        new TypeToken<List<CommentBean>>() {
+    }.getType());
+    if (list == null) {
+      list = Collections.EMPTY_LIST;
+    }
+    return list;
+  }
 
-	@Override
-	public void sendComment(String festivalId, CommentBean comment) {
-		HttpClient httpclient = new DefaultHttpClient();
-		HttpPost httppost = new HttpPost(RestClient.BASEURL + festivalId + "/comments");
+  @Override
+  public List<CommentBean> getFilteredComments(String festivalId, String needle) {
+    List<CommentBean> list = (List<CommentBean>) rc.getData(festivalId + "/comments?search=" + needle,
+        new TypeToken<List<CommentBean>>() {
+    }.getType());
+    if (list == null) {
+      list = Collections.EMPTY_LIST;
+    }
+    return list;
+  }
 
-		try {
-			Gson gson = new Gson();
-			// Add your data
-			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-			nameValuePairs.add(new BasicNameValuePair("comment", gson.toJson(comment)));
-			httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+  @Override
+  public void sendComment(String festivalId, CommentBean comment) {
+    HttpClient httpclient = new DefaultHttpClient();
+    HttpPost httppost = new HttpPost(RestClient.BASEURL + festivalId + "/comments");
 
-			// Execute HTTP Post Request
-			HttpResponse response = httpclient.execute(httppost);
+    try {
+      Gson gson = new Gson();
+      // Add your data
+      List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+      nameValuePairs.add(new BasicNameValuePair("comment", gson.toJson(comment)));
+      httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
-		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-		}
+      // Execute HTTP Post Request
+      HttpResponse response = httpclient.execute(httppost);
 
-	}
+    } catch (ClientProtocolException e) {
+      // TODO Auto-generated catch block
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+    }
+
+  }
 
 }
